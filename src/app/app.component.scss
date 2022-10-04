@@ -1,0 +1,50 @@
+.example-container {
+  width: 500px;
+  height: 300px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-sidenav {
+  padding: 20px;
+}
+
+.logo {
+  background: url("../assets/svg/logo.svg");
+  fill: red;
+  height: 50px;
+  width: 50px;
+  margin: 10px 10px;
+}
+
+:host ::ng-deep .card-container {
+  display: flex;
+  justify-content: center;
+  .card {
+      
+
+      &.primary-box {
+          
+          padding: 0;
+          color: var(--primary-color-text);
+          border-radius: 10px;
+          .p-ink {
+            background: rgba(#4baf50, 0.3);
+        }
+      }
+    }
+  }
+
+  .outlet-container {
+    display: flex!important;
+    flex-direction: row-reverse!important;
+    justify-content: center!important;
+    flex-wrap: wrap!important;
+    column-gap: 10px!important;
+  }

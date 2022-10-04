@@ -1,0 +1,14 @@
+<p-dialog header="Header" [(visible)]="displayDialog" [breakpoints]="{'960px': '75vw'}" [style]="{width: '50vw'}"
+    [draggable]="true" [resizable]="false" [closable]="true" [transitionOptions]="'50ms'">
+    <div class="grid p-fluid">
+        <div>
+            <div class="p-inputgroup" style="justify-content: center;">
+                <span class="p-inputgroup-addon"><i class="pi pi-building"></i></span>
+                <input type="text" pInputText [(ngModel)]="inputValue"> 
+                <p-button (click)="getCity()" label="Yes" styleClass="p-button-text"></p-button>
+               
+            </div>
+        </div>       
+    </div>
+        
+</p-dialog>

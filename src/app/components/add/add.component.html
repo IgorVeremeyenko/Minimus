@@ -1,14 +1,25 @@
+<p-toast position="top-right"></p-toast>
 <p-dialog header="Header" [(visible)]="displayDialog" [breakpoints]="{'960px': '75vw'}" [style]="{width: '50vw'}"
     [draggable]="true" [resizable]="false" [closable]="true" [transitionOptions]="'50ms'">
     <div class="grid p-fluid">
         <div>
             <div class="p-inputgroup" style="justify-content: center;">
-                <span class="p-inputgroup-addon"><i class="pi pi-building"></i></span>
-                <input type="text" pInputText [(ngModel)]="inputValue"> 
-                <p-button (click)="getCity()" label="Yes" styleClass="p-button-text"></p-button>
+                <div *ngIf="!isLoading; then next else loading"></div>                    
+                <ng-template #next>
+                    <span class="p-input-icon-right"> 
+                        <i class="pi pi-building"></i>
+                        <input type="text" pInputText [(ngModel)]="inputValue"> 
+                    </span>
+                </ng-template>
+                <ng-template #loading>
+                    <span class="p-input-icon-right">
+                        <i class="pi pi-spin pi-spinner"></i>
+                        <input type="text" pInputText [(ngModel)]="inputValue"> 
+                    </span>
+                </ng-template>
+                <p-button (click)="addCityCard()" label="Yes" styleClass="p-button-text"></p-button>
                
             </div>
         </div>       
     </div>
-        
 </p-dialog>

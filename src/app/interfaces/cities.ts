@@ -1,4 +1,4 @@
 export interface Cities {
-    cities: object
+    cities: {},
     username: string 
 }

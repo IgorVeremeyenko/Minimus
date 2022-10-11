@@ -19,6 +19,11 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from './services/auth.service';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { CardComponent } from './components/card/card.component';
+import { MessageService } from 'primeng/api';
+import { LoginGuardModule } from './guard/login-guard/login-guard.module';
+import { MainGuardModule } from './guard/main-guard/main-guard.module';
+import { DeactivateGuardModule } from './guard/deactivate-guard/deactivate-guard.module';
+import { BreadcrumnpClassComponent } from './components/breadcrumnp-class/breadcrumnp-class.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +32,8 @@ import { CardComponent } from './components/card/card.component';
     AddComponent,
     ListComponent,
     SignUpComponent,
-    CardComponent
+    CardComponent,
+    BreadcrumnpClassComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +48,7 @@ import { CardComponent } from './components/card/card.component';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, MessageService, LoginGuardModule, MainGuardModule, DeactivateGuardModule],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

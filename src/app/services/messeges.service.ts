@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -8,7 +9,7 @@ export class MessegesService {
 
   displayMessege!: BehaviorSubject<object>;
 
-  constructor() {
+  constructor(public msg: MessageService) {
     this.displayMessege = new BehaviorSubject<object>([])
    }
 
@@ -19,4 +20,11 @@ export class MessegesService {
   getMes(){
     return this.displayMessege.asObservable();
   }
+
+  getToast(value: string, status: number){
+    status === 200 ? this.msg.add({severity: 'Success', summary: 'Success', detail: value})
+    :
+    this.msg.add({severity: 'warn', summary: 'Something wrong...', detail: value})
+  }
+
 }

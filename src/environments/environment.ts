@@ -26,8 +26,15 @@ export const environment = {
     token_uri: "https://oauth2.googleapis.com/token",
     auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
     client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-2137d%40portfilio-weather-angular-ts.iam.gserviceaccount.com"
+  },
+  keysApi: {
+    hereSite: "VOxC7kPhPTFGaaEDupCF-J6TwdH7i4UavjO4CBzfjTU",
+    weatherAPI: "599cb26395c436e3744755f147138dd6",
+    openMeteo: "https://api.open-meteo.com/v1/forecast?latitude=35.69393&longitude=139.75371&hourly=temperature_2m,windspeed_10m"
   }
 };
+export const meteo = environment.keysApi.openMeteo;
+export const apiKey = environment.keysApi.hereSite;
 export const app = initializeApp(environment.firebaseConfig);
 
 /*

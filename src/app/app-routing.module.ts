@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddComponent } from './components/add/add.component';
 import { DetailsComponent } from './components/details/details.component';
 import { ListComponent } from './components/list/list.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { DeactivateGuardModule } from './guard/deactivate-guard/deactivate-guard.module';
+import { LoginGuardModule } from './guard/login-guard/login-guard.module';
+import { MainGuardModule } from './guard/main-guard/main-guard.module';
 
 const routes: Routes = [
   {
-    path: '', component: SignUpComponent
+    path: '', component: SignUpComponent, canActivate: [LoginGuardModule]
   },
   {
-    path: 'details', component: DetailsComponent 
+    path: 'details', component: DetailsComponent, canDeactivate: [DeactivateGuardModule]
   },
   {
-    path: 'add', component: AddComponent
-  },
-  {
-    path: 'main', component: ListComponent
+    path: 'main', component: ListComponent, canActivate: [MainGuardModule]
   }
 ];
 

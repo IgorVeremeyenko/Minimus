@@ -7,3 +7,15 @@
 li {
     list-style: none;
 }
+
+.skeleton-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+.skeleton {
+    display: flex;
+    column-gap: 24px;
+    flex-wrap: wrap;
+}

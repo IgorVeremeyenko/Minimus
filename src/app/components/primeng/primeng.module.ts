@@ -16,6 +16,10 @@ import {DropdownModule} from 'primeng/dropdown';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
+import {DataViewModule} from 'primeng/dataview';
+import {TabViewModule} from 'primeng/tabview';
+import {ChartModule} from 'primeng/chart';
+import {BreadcrumbModule} from 'primeng/breadcrumb';
 
 @NgModule({
   declarations: [],
@@ -36,7 +40,11 @@ import {ToastModule} from 'primeng/toast';
     DropdownModule,
     MessageModule,
     MessagesModule,
-    ToastModule
+    ToastModule,
+    DataViewModule,
+    TabViewModule,
+    ChartModule,
+    BreadcrumbModule
   ],
   exports: [
     ButtonModule,
@@ -54,7 +62,11 @@ import {ToastModule} from 'primeng/toast';
     DropdownModule,
     MessageModule,
     MessagesModule,
-    ToastModule
+    ToastModule,
+    DataViewModule,
+    TabViewModule,
+    ChartModule,
+    BreadcrumbModule
   ]
 })
 export class PrimengModule { }

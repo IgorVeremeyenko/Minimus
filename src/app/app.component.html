@@ -19,17 +19,10 @@
   </div>
 
 </p-toolbar>
-<p-messages [(value)]="msgs"></p-messages>
-
+<app-breadcrumnp-class></app-breadcrumnp-class>
+<app-toasts></app-toasts>
 <app-add [displayResponsive]="displayDialog"></app-add>
 <div class="outlet-container">
-  <p-card header="Add city" [style]="{width: '150px'}" styleClass="p-card-shadow">
-    <div class="card-container">
-      <div class="card primary-box" pRipple (click)="showMaximizableDialog()">
-        <img alt="Card" src="../assets/svg/add.svg" width="50" height="50">
-      </div>
-      
-    </div>
-  </p-card>
+  
   <router-outlet></router-outlet>
 </div>

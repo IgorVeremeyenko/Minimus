@@ -11,6 +11,7 @@ import { getDatabase, onValue, ref } from 'firebase/database';
 import { app } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -28,21 +29,26 @@ export class AuthService {
   ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
-    // this.afAuth.authState
-    // .subscribe((user) => {
-    //   if (user) {
-    //     this.userData = user
-    //     this.getDataFromDatabase(this.userData);        
-    //     const token = user.getIdToken();
-    //     token.then(symbol => this.userToken = symbol);
-    //     localStorage.setItem('user', JSON.stringify(this.userData));
-    //     JSON.parse(localStorage.getItem('user')!);
-    //   } else {
-    //     localStorage.setItem('user', 'null');
-    //     JSON.parse(localStorage.getItem('user')!);
-    //   }
-    // });
+    this.afAuth.authState
+    .subscribe((user) => {
+      if (user) {
+        this.userData = user
+        this.getDataFromDatabase(this.userData);        
+        const token = user.getIdToken();
+        token.then(symbol => this.userToken = symbol);
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem('user')!);
+      } else {
+        localStorage.setItem('user', 'null');
+        JSON.parse(localStorage.getItem('user')!);
+      }
+    });
     
+  }
+
+  isLogged(): boolean{
+    const isLogged = localStorage.getItem('user');
+    return isLogged === null ? false : true;
   }
 
   getDataFromDatabase(user: any){
@@ -50,10 +56,18 @@ export class AuthService {
     if(user){
       onValue(ref(this.database, 'userProfile/' + user.multiFactor.user.uid), (snapshot) => {
         const data = snapshot.val();
-        this.cities = data; 
+        if(this.cities === undefined) this.cities = data;
+          else {
+            this.cities = undefined;
+            this.cities = data;
+          }
       })
 
     }
+  }
+
+  getUserId(){
+    return this.userData.multifactor.user.uid;
   }
 
   // Sign in with email/password

@@ -1,7 +1,14 @@
-<p-card [header]="cityName">
-    
-    {{temperature}}°C ... and icon
-    <ng-template pTemplate="footer">
-        {{wind}} m/s
-    </ng-template>
-</p-card>
+<div class="card">
+    <p-tabView>
+        <p-tabPanel header="Temperature">
+            <div>
+                <p-chart width="90vw" height="20vh" type="line" [data]="lineStylesData" [options]="basicOptions"></p-chart>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Wind">
+            <div>
+                <p-chart width="90vw" height="40vh" type="line" [data]="lineStylesData" [options]="basicOptions"></p-chart>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+</div>

@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuItem } from 'primeng/api';
 import { Subject, Subscription } from 'rxjs';
 import { CanComponentDeactivate } from 'src/app/guard/deactivate-guard/deactivate-guard.module';
 import { Geocode } from 'src/app/interfaces/geocode';
+import { Linestyle } from 'src/app/interfaces/linestyle';
 import { Meteo } from 'src/app/interfaces/meteo';
+import { MeteoHourly } from 'src/app/interfaces/meteo-hourly';
 import { BreadcrumbsService } from 'src/app/services/breadcrumbs.service';
 import { WeatherService } from 'src/app/services/weather.service';
 
@@ -28,7 +29,7 @@ export class DetailsComponent implements OnInit, CanComponentDeactivate {
 
   @Input() wind: number | string = 'N/A';
 
-  lineStylesData: any;
+  lineStylesData!: Linestyle;
 
   basicOptions: any;
 
@@ -40,42 +41,59 @@ export class DetailsComponent implements OnInit, CanComponentDeactivate {
 
   lat!: number;
   lng!: number;
+  loading: boolean = true;
   forecastMeteo!: Meteo
+  meteoHourly: MeteoHourly[] = [];
+  data: number[] = [];
+  dayOfWeek: string[] = [];
+  value3: any;
+  justifyOptions!: any[];
+  paymentOptions!: any[];
+
+  products: any[] = [];
+
+  selectedCity: string | null = ''
 
   constructor(private configService: WeatherService, private router: Router, private breadcrumbp: BreadcrumbsService) { }
 
   ngOnInit(): void {
-    this.lineStylesData = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [        
-        {
-          label: 'Third Dataset',
-          data: [12, 51, 62, 33, 21, 62, 45],
-          fill: true,
-          borderColor: '#FFA726',
-          tension: .4,
-          backgroundColor: 'rgba(255,167,38,0.2)'
-        }
-      ]
-    };
-    this.config = this.configService.config;
-    this.updateChartOptions();
-    this.subscription = this.configService.configUpdate$.subscribe(config => {
-      this.config = config;
-      this.updateChartOptions();
-    });
-//forecast for 7 days
-    this.configService.getCoordinates('Kherson').subscribe(res => res.items.map(coordinates => {
+    this.breadcrumbp.menus.subscribe(item => this.selectedCity = item);
+    this.products = new Array(5);
+    //forecast for 7 days
+    this.configService.getCoordinates(this.selectedCity).subscribe(res => res.items.map(coordinates => {
       this.lat = coordinates.position.lat;
       this.lng = coordinates.position.lng;
       this.getFromMeteo(this.lat, this.lng);
     }))
-    
+        
   } 
+
+  initChartData(){
+    this.lineStylesData = {
+      labels: this.dayOfWeek,
+      datasets: [        
+        {   
+          label: 'Temperature',     
+          data: this.data,
+          fill: true,
+          borderColor: '#FFA726',
+          tension: .4,
+          backgroundColor: 'rgba(255,167,38,0.2)',
+          drawActiveElementsOnTop: true
+        }
+      ]
+    };
+    this.config = this.configService.config;
+      this.updateChartOptions();
+      this.subscription = this.configService.configUpdate$.subscribe(config => {
+        this.config = config;
+        this.updateChartOptions();
+      });
+      this.loading = false;
+  }
 
   canDeactivate() {
     this.breadcrumbp.clearMenu();
-    
     return true;
   }
 
@@ -86,9 +104,47 @@ export class DetailsComponent implements OnInit, CanComponentDeactivate {
       this.applyLightTheme();
   }
 
-  getFromMeteo(lat: number, lng: number){
+  getAvarageTemp(array: Array<number>){
+    return Math.round(array.reduce((a, b) => a + b, 0) / array.length);
+  }
+
+  updateData(data: number[]){
+    this.data = data;
+  }
+
+  getFromMeteo(lat: number, lng: number){ 
     this.configService.forecastOpenMeteo(lat,lng).subscribe(items => {
       this.forecastMeteo = items;
+      let temp: number[] = [];
+      for (const iterator of this.forecastMeteo.daily.temperature_2m_max) {
+        temp.push(iterator);        
+      }
+      const t = this.forecastMeteo.daily.time;
+      let beforeDays: string[] = []
+      for (const iterator of t) {
+        let day = new Date(iterator).getDay();
+        switch(day){
+          case 0 : beforeDays.push('Sunday');
+          break;
+          case 1 : beforeDays.push('Monday');
+          break;
+          case 2 : beforeDays.push('Tuesday');
+          break;
+          case 3 : beforeDays.push('Wednesday');
+          break;
+          case 4 : beforeDays.push('Thursday');
+          break;
+          case 5 : beforeDays.push('Friday');
+          break;
+          case 6 : beforeDays.push('Saturday');
+          break;
+        }        
+      } 
+      setTimeout(() => {
+        this.dayOfWeek = beforeDays;
+        this.data = temp;
+        this.initChartData();        
+      }, 1000);
     })
   }
 
@@ -99,12 +155,19 @@ export class DetailsComponent implements OnInit, CanComponentDeactivate {
           labels: {
             color: '#495057'
           }
+        },
+        tooltip: true
+      },
+      elements: {
+        point: {
+          radius: 10
         }
       },
       scales: {
         x: {
           ticks: {
-            color: '#495057'
+            color: '#495057',
+            align: 'start'
           },
           grid: {
             color: '#ebedef'
@@ -116,7 +179,8 @@ export class DetailsComponent implements OnInit, CanComponentDeactivate {
           },
           grid: {
             color: '#ebedef'
-          }
+          },
+          stacked: true
         }
       }
     };

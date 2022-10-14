@@ -30,7 +30,7 @@ export const environment = {
   keysApi: {
     hereSite: "VOxC7kPhPTFGaaEDupCF-J6TwdH7i4UavjO4CBzfjTU",
     weatherAPI: "599cb26395c436e3744755f147138dd6",
-    openMeteo: "https://api.open-meteo.com/v1/forecast?latitude=35.69393&longitude=139.75371&hourly=temperature_2m,windspeed_10m"
+    openMeteo: "https://api.open-meteo.com/v1/forecast?latitude=52.2297&longitude=21.0122&hourly=temperature_2m,weathercode,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin"
   }
 };
 export const meteo = environment.keysApi.openMeteo;

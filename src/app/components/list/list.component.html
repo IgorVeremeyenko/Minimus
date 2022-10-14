@@ -5,7 +5,7 @@
     <p-card header="Add city" [style]="{width: '150px'}" styleClass="p-card-shadow">
         <div class="card-container">
           <div class="card primary-box" pRipple (click)="showMaximizableDialog()">
-            <img alt="Card" src="../assets/svg/add.svg" width="50" height="50">
+            <img alt="Card" src="../assets/svg/add.svg" width="68" height="68">
           </div>
           
         </div>
@@ -14,7 +14,7 @@
 
 <ng-template #ElseBlock>
     <div class="skeleton">
-        <div class="card" *ngFor="let items of skeletonItems; index as i">
+        <div *ngFor="let items of skeletonItems; index as i">
             <div class="grid formgrid">
                 <div class="skeleton-container">
                     <p-skeleton styleClass="mb-2"></p-skeleton>

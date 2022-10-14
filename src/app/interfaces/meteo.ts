@@ -13,13 +13,33 @@ export interface Meteo {
     },
     hourly: {
         time: [
-            Date
+            Date | string
         ],
         temperature_2m: [
-            number
+            number | string
         ],
         windspeed_10m: [
-            number           
+            number | string
+        ]
+    },
+    daily_units: {
+        time: string,
+        weathercode: string,
+        temperature_2m_max: string,
+        temperature_2m_min: string
+    },
+    daily: {
+        time: [
+            Date
+        ],
+        weathercode: [
+            number
+        ],
+        temperature_2m_max: [
+            number
+        ],
+        temperature_2m_min: [
+            number
         ]
     }
 }

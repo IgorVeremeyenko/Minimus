@@ -24,6 +24,7 @@ import { LoginGuardModule } from './guard/login-guard/login-guard.module';
 import { MainGuardModule } from './guard/main-guard/main-guard.module';
 import { DeactivateGuardModule } from './guard/deactivate-guard/deactivate-guard.module';
 import { BreadcrumnpClassComponent } from './components/breadcrumnp-class/breadcrumnp-class.component';
+import { DetailsGuardModule } from './guard/details-guard/details-guard.module';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { BreadcrumnpClassComponent } from './components/breadcrumnp-class/breadc
     AngularFireStorageModule,
     AngularFireDatabaseModule,
   ],
-  providers: [AuthService, MessageService, LoginGuardModule, MainGuardModule, DeactivateGuardModule],
+  providers: [AuthService, MessageService, LoginGuardModule, MainGuardModule, DeactivateGuardModule, DetailsGuardModule],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

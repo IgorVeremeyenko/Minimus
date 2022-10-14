@@ -15,8 +15,8 @@ export class BreadcrumnpClassComponent implements OnInit {
   constructor(private breadcrumbp: BreadcrumbsService) { }
   
   ngOnInit(): void {
-    this.home = { icon: 'pi pi-home', routerLink: '/main' };
-    this.breadcrumbp.getMenuItems().subscribe((menu: any) => {
+    this.home = { icon: 'pi pi-home', routerLink: '/main',  label: '  Main' };
+    this.breadcrumbp.getMenuItems().subscribe((menu: string | null) => {
       if(menu === null) this.items = []
       else this.items.push({label: menu})
     })

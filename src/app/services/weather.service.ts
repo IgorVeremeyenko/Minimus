@@ -20,6 +20,8 @@ export class WeatherService {
 
   database = getDatabase(app);
 
+  dataChart!: Subject<string>[];
+
   listOfCities!: any[];
 
   config: AppConfig = {
@@ -35,6 +37,17 @@ export class WeatherService {
 
   constructor(private _http: HttpClient, private authService: AuthService) {
     this.user = this.authService.userData;
+    this.dataChart = [];
+  }
+
+  getDataChart(){
+    return this.dataChart.map(item => item.asObservable());
+  }
+
+  setDataChart(value: string){
+    this.dataChart.map(item => {
+      item.next(value);
+    })
   }
 
   updateConfig(config: AppConfig) {
@@ -42,7 +55,7 @@ export class WeatherService {
     this.configUpdate.next(config);
   }
 
-  getCoordinates(city: string){
+  getCoordinates(city: string | null){
     const url = `https://geocode.search.hereapi.com/v1/geocode?q=${city}&apiKey=${apiKey}`
     return this._http.get<Geocode>(url);
   }
@@ -51,8 +64,8 @@ export class WeatherService {
     return this.config;
   }
 
-  forecastOpenMeteo(lat: number, lon: number){
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,windspeed_10m`
+  forecastOpenMeteo(lat: number, lon: number){     
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weathercode,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin`
     return this._http.get<Meteo>(url);
   }
 

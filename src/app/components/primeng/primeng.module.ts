@@ -20,6 +20,7 @@ import {DataViewModule} from 'primeng/dataview';
 import {TabViewModule} from 'primeng/tabview';
 import {ChartModule} from 'primeng/chart';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 @NgModule({
   declarations: [],
@@ -44,7 +45,8 @@ import {BreadcrumbModule} from 'primeng/breadcrumb';
     DataViewModule,
     TabViewModule,
     ChartModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    SelectButtonModule
   ],
   exports: [
     ButtonModule,
@@ -66,7 +68,8 @@ import {BreadcrumbModule} from 'primeng/breadcrumb';
     DataViewModule,
     TabViewModule,
     ChartModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    SelectButtonModule
   ]
 })
 export class PrimengModule { }

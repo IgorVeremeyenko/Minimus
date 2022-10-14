@@ -1,14 +1,35 @@
-<div class="card">
+<div class="card" *ngIf="!loading; else elseBlock">
     <p-tabView>
-        <p-tabPanel header="Temperature">
+        <p-tabPanel>
             <div>
-                <p-chart width="90vw" height="20vh" type="line" [data]="lineStylesData" [options]="basicOptions"></p-chart>
+                <p-chart width="900px" height="300px" type="line" [data]="lineStylesData"
+                    [refresh]="data" [options]="basicOptions"></p-chart>
             </div>
         </p-tabPanel>
-        <p-tabPanel header="Wind">
-            <div>
-                <p-chart width="90vw" height="40vh" type="line" [data]="lineStylesData" [options]="basicOptions"></p-chart>
-            </div>
-        </p-tabPanel>
+        
     </p-tabView>
 </div>
+<ng-template #elseBlock>
+    <div class="card" style="width: 500px;">
+        <div class="grid formgrid">
+            <div class="field col-12 md:col-6 md:pr-6 pr-0">
+                <div class="custom-skeleton p-4">
+                    <div class="flex mb-3" style="display: flex;">
+                        <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>
+                        <div>
+                            <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+                            <p-skeleton height=".5rem"></p-skeleton>
+                        </div>
+                    </div>
+                    <p-skeleton width="100%" height="150px"></p-skeleton>
+                    <div class="flex justify-content-between mt-3" style="display: flex; justify-content: space-between;">
+                        <p-skeleton width="4rem" height="2rem"></p-skeleton>
+                        <p-skeleton width="4rem" height="2rem"></p-skeleton>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</ng-template>

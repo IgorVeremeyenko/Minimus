@@ -2,3 +2,28 @@
     display: flex;
     column-gap: 94px;
 }
+
+// .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link:hover{
+//     text-decoration: none!important;
+// }
+
+:host ::ng-deep .tabview-custom { i, span { vertical-align: middle; } span { margin: 0 .5rem; }
+} :host ::ng-deep .p-button { margin-right: .25rem;
+} :host ::ng-deep .p-tabview p { line-height: 1.5; margin: 0;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+}
+
+.weather {
+    display: flex;
+    flex-wrap: wrap;
+}

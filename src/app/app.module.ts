@@ -25,6 +25,7 @@ import { MainGuardModule } from './guard/main-guard/main-guard.module';
 import { DeactivateGuardModule } from './guard/deactivate-guard/deactivate-guard.module';
 import { BreadcrumnpClassComponent } from './components/breadcrumnp-class/breadcrumnp-class.component';
 import { DetailsGuardModule } from './guard/details-guard/details-guard.module';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { DetailsGuardModule } from './guard/details-guard/details-guard.module';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    AngularSvgIconModule.forRoot()
   ],
   providers: [AuthService, MessageService, LoginGuardModule, MainGuardModule, DeactivateGuardModule, DetailsGuardModule],
   bootstrap: [AppComponent],

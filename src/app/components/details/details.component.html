@@ -1,16 +1,48 @@
 <div class="card" *ngIf="!loading; else elseBlock">
-    <p-tabView>
-        <p-tabPanel>
-            <div>
-                <p-chart width="900px" height="300px" type="line" [data]="lineStylesData"
-                    [refresh]="data" [options]="basicOptions"></p-chart>
+    <!-- <p-tabView (onChange)="showItem($event)" styleClass="tabview-custom">
+            <p-tabPanel [header]="item" *ngFor="let item of dayOfWeek; let i = index" [selected]="i == 0">                
+                <ng-template pTemplate="content">
+                    <p-chart width="80vw" height="40vh" type="line" [data]="lineStylesData"
+                        [refresh]="data" [options]="basicOptions"></p-chart>
+                </ng-template>
+            </p-tabPanel>    
+        </p-tabView> -->
+        <p-tabView >
+            <p-tabPanel header="Temperature">                
+                <ng-template pTemplate="content">
+                    <div class="weather">
+                        <svg-icon src="../../../assets/svg/weather/animated/clear-day.svg" [svgStyle]="{ 'padding.px':15, 'margin.px': 15, 'width.px': 60, 'height.px': 60 }"></svg-icon>
+                        <div class="description">
+                            <span> <small> Active Users</small></span>
+                            <span><small> C</small></span>
+                        </div>
+                    </div>                    
+                    <p-chart width="80vw" height="40vh" type="line" [data]="lineStylesData"
+                        [refresh]="data" [options]="basicOptions"></p-chart>
+                </ng-template>
+            </p-tabPanel>   
+            <p-tabPanel header="Wind">                
+                <ng-template pTemplate="content">
+                    <p-chart width="80vw" height="40vh" type="line" [data]="windData" [options]="optionsForWind"></p-chart>
+                </ng-template>
+            </p-tabPanel>   
+        </p-tabView>
+        <div class="buttons-container">
+            <div *ngFor="let day of days">
+                <!-- <button pButton pRipple type="button" [label]="day" class="p-button-success p-button-text"></button>    -->
+                <button 
+                    pButton 
+                    pRipple 
+                    type="button" 
+                    [label]="day" 
+                    class="p-button-raised p-button-secondary p-button-text"
+                    (click)="getCurrentDayWeather(day)"
+                ></button>        
             </div>
-        </p-tabPanel>
-        
-    </p-tabView>
+        </div>
 </div>
 <ng-template #elseBlock>
-    <div class="card" style="width: 500px;">
+    <div style="width: 80vw;">
         <div class="grid formgrid">
             <div class="field col-12 md:col-6 md:pr-6 pr-0">
                 <div class="custom-skeleton p-4">

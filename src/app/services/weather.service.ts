@@ -8,13 +8,14 @@ import { Subject } from 'rxjs';
 import { AppConfig } from '../components/details/details.component';
 import { apiKey } from '../../environments/environment'
 import { Geocode } from '../interfaces/geocode';
-import { meteo } from 'src/environments/environment';
 import { Meteo } from '../interfaces/meteo';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherService {
+
+  weatherDescription: string = ''
 
   user: any;
 
@@ -72,6 +73,11 @@ export class WeatherService {
   getData(name: string) {
     const uRl = `https://api.openweathermap.org/data/2.5/weather?q=${name}&lang=en&appid=599cb26395c436e3744755f147138dd6&units=metric`;
     return this._http.get<Weather>(uRl);
+  }
+
+  getIconWeather(code: string){
+    const url = `https://openweathermap.org/img/wn/${code}@2x.png`;
+    return url;
   }
 
   getCity(cityName: string) {

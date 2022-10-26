@@ -70,6 +70,10 @@ export class AuthService {
     return this.userData.multifactor.user.uid;
   }
 
+  getUserData(){
+    return this.userData;
+  }
+
   // Sign in with email/password
   SignIn(email: string, password: string) {
     return this.afAuth

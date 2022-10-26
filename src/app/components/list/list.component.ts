@@ -6,7 +6,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DialogOptionsService } from 'src/app/services/dialog-options.service';
 import { Router } from '@angular/router';
 import { BreadcrumbsService } from 'src/app/services/breadcrumbs.service';
-import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-list',
@@ -18,6 +17,7 @@ export class ListComponent implements OnInit, AfterViewInit {
   data: Weather[] = [];
   temperature!: number;
   wind!: number;
+  urlImage: string = ''
   cities: any;
   dataBase: any; 
   user: any;
@@ -26,7 +26,9 @@ export class ListComponent implements OnInit, AfterViewInit {
   constructor(private breadCrumbp: BreadcrumbsService, private dataService: WeatherService, private authService: AuthService, private _dialogService: DialogOptionsService, private _router: Router) { }
   ngAfterViewInit(): void {
     // this.isLoading = false;
+   
   }
+
 
   ngOnInit(): void {
     // this.breadCrumbp.getMenuItems().map(item => item.asObservable().subscribe(result => console.log(result)))
@@ -49,16 +51,16 @@ export class ListComponent implements OnInit, AfterViewInit {
             if(this.data.length > 1) this.data = []
             this.dataService.getData(items[iterator]).subscribe(names => {
               this.data.push(names);
-            })
+            })           
           }
           this.isLoading = false;
           
-        })       
-        
-       
+        })   
+               
       } else {
         
       }
+      
     });
   }
   

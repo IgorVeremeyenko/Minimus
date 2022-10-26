@@ -1,9 +1,16 @@
 export interface Weather {
-    weather: {
-        id: number,
-        main: string,
-        description: string
+    coord: {
+        lon: -0.13,
+        lat: 51.51
     },
+    weather: [
+        {
+            id: number,
+            main: string,
+            description: string,
+            icon: string
+        }
+    ],
     main: {
         temp: number,
         humidity: number

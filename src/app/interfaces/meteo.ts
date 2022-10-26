@@ -20,6 +20,9 @@ export interface Meteo {
         ],
         windspeed_10m: [
             number | string
+        ],
+        weathercode: [
+            number
         ]
     },
     daily_units: {

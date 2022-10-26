@@ -1,4 +1,40 @@
-.card {
-    height: 183px!important;
-    margin-bottom: 10vh!important;
+// .card {
+//     height: 183px!important;
+//     margin-bottom: 10vh!important;
+// }
+:host ::ng-deep .p-card-body .backr{
+    position: absolute;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    // opacity: 23%;
+    top: 0;
+    right: 0;
+}
+:host ::ng-deep .p-card-title {
+    color: #DE4A00;
+    position: relative;
+    z-index: 10;
+    text-shadow: 0 0 20px black;
+}
+:host ::ng-deep .p-card-footer strong {
+    color: white;
+}
+.weather-icon {
+    position: relative;
+    top: 2rem;
+    left: 3rem;
+    box-shadow: 0 0 20px 0px black;
+    background: rgb(222 74 0);
+    border-radius: 60px;
+}
+.temperature strong {
+    position: absolute;
+    font-size: 2.8rem;
+    text-shadow: 0 0 11px black;
+    z-index: 10;
+}
+
+.temperature {
+    color: white;
+    position: relative;
 }

@@ -16,6 +16,8 @@
     display: flex;
     justify-content: space-around;
     margin-bottom: 1rem;
+    row-gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .description {
@@ -27,3 +29,51 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.cont {
+    display: flex;
+    justify-content: space-between;
+}
+
+.name{
+    font-size: 24px;
+}
+
+.city{
+    display: flex;
+    flex-direction: column;
+}
+
+.windy{
+    display: flex;
+    justify-content: space-between;
+}
+
+:host ::ng-deep .p-card-body {
+    display: flex!important;
+    flex-direction: column!important;
+    align-items: center!important; 
+    padding: 0.5rem;
+    cursor: pointer;
+}
+:host ::ng-deep .p-card-subtitle {
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: small;
+}
+:host ::ng-deep .p-card-content {
+    padding: 0;
+}
+:host ::ng-deep .p-card-footer {
+    padding: 0;
+    display: flex;
+    column-gap: 5px;
+    height: 24px;
+}
+.min {
+    font-weight: 100!important;
+}
+
+// .description{
+//     text-transform: capitalize!important;
+// }

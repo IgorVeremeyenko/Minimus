@@ -1,7 +1,9 @@
-<p-card class="card" [header]="cityName">
-    
-    {{temperature}}°C ... and icon
+<p-card class="card" [header]="cityName" [style.background-image]="randomImage">
+    <img class="backr" alt="Background Image" style="position: absolute;" [src]="randomImage" width="150" height="150">
+    <div class="temperature">
+        <strong>{{temperature}}°C</strong>  <img class="weather-icon" [src]="path" height="100" width="100" alt="weather icon">
+    </div>
     <ng-template pTemplate="footer">
-        {{wind}} m/s
+     <strong>Wind speed {{wind}} m/s</strong>  
     </ng-template>
 </p-card>

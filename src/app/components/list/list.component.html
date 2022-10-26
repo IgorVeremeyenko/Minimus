@@ -1,15 +1,15 @@
 <div *ngIf="!isLoading; else ElseBlock" class="cards">
     <div *ngFor="let items of data; index as i">
-        <app-card [cityName]="items.name" [temperature]="items.main.temp" [wind]="items.wind.speed" (click)="goToDetails(items.name)"></app-card>
-    </div>
-    <p-card header="Add city" [style]="{width: '150px'}" styleClass="p-card-shadow">
-        <div class="card-container">
-          <div class="card primary-box" pRipple (click)="showMaximizableDialog()">
-            <img alt="Card" src="../assets/svg/add.svg" width="68" height="68">
-          </div>
-          
-        </div>
-      </p-card>
+        <app-card 
+            [cityName]="items.name" 
+            [temperature]="items.main.temp" 
+            [wind]="items.wind.speed" 
+            [icon]="items.weather[0].icon" 
+            [weatherDescription]="items.weather[0].description"
+            (click)="goToDetails(items.name)"
+        ></app-card>
+    </div>    
+      <button pButton pRipple type="button" icon="pi pi-plus" label="Add city" (click)="showMaximizableDialog()" class="p-button p-button-text"></button>
 </div>
 
 <ng-template #ElseBlock>

@@ -49,3 +49,10 @@
     column-gap: 10px!important;
     margin-top: 2em;
   }
+
+  :host {
+
+    ::ng-deep .toolbar {
+      background-color: #484672!important;
+    }
+  }

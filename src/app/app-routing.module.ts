@@ -10,7 +10,7 @@ import { MainGuardModule } from './guard/main-guard/main-guard.module';
 
 const routes: Routes = [
   {
-    path: '', component: SignUpComponent, canActivate: [LoginGuardModule]
+    path: '', component: SignUpComponent
   },
   {
     path: 'details', component: DetailsComponent, canDeactivate: [DeactivateGuardModule], canActivate: [DetailsGuardModule]

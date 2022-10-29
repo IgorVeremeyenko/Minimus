@@ -14,8 +14,8 @@ export class MainGuardModule implements CanActivate {
   constructor(private _router: Router, private auth: AuthService){}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
-    const isLogged = this.auth.isLogged();
-    if(isLogged === false){
+    const isLogged = this.auth.isLoggedIn
+    if(!isLogged){
       this._router.navigateByUrl('');
       return false;
     }

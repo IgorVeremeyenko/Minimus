@@ -50,7 +50,7 @@ export class AuthService {
 
   isLogged(): boolean{
     const isLogged = localStorage.getItem('user');
-    return isLogged === null ? false : true;
+    return isLogged === 'null'? false : true;
   }
 
   getDataFromDatabase(user: any){
@@ -115,7 +115,7 @@ export class AuthService {
         this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
           if (user) {
-            this.router.navigate(['dashboard']);
+            this.router.navigate(['main']);
           }
         });
       })
@@ -163,8 +163,11 @@ export class AuthService {
   }
   // Sign in with Google
   GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider()).then(() => {
-      this.router.navigateByUrl('main');
+    return this.AuthLogin(new auth.GoogleAuthProvider()).then((res) => {
+      setTimeout(()=> {
+        this.router.navigate(['main']);
+
+      }, 1500)
     });
   }
   // Auth logic to run auth providers

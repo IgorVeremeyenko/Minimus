@@ -56,3 +56,14 @@
       background-color: #484672!important;
     }
   }
+
+  .name {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    cursor: pointer;
+  }
+
+  :host ::ng-deep .p-button-rounded .p-button-text {
+    margin-top: 3rem;
+  }

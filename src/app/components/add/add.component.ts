@@ -57,24 +57,51 @@ export class AddComponent implements OnInit {
     this.weatherService.getCity(this.inputValue).subscribe({
       next: () => {
         this.isLoading = true
+        for (const key in this.authService.cities.cities) {
+          if (Object.prototype.hasOwnProperty.call(this.authService.cities.cities, key)) {
+            const element = this.authService.cities.cities[key];
+            let el = element.toLowerCase();
+            let inp = this.inputValue.toLowerCase();
+            if(el === inp){
+              this.show('This city is already exists', 211);
+              setTimeout(()=> {
+                this.isLoading = false
+              }, 1000)
+              return;
+            }
+            
+          }
+        }
         this.show('Found', 200); 
-        const id = JSON.parse(localStorage.getItem('user')!);
-        this.weatherService.pushCitiesToUser(id.uid, this.inputValue)
-        .then(() => {
-          setTimeout(()=> this.isLoading = false, 1000)          
-        })
-        .catch(error => this.show(error.error.message, error.error.cod))
+              const id = JSON.parse(localStorage.getItem('user')!);
+              this.weatherService.pushCitiesToUser(id.uid, this.inputValue)
+              .then(() => {
+                setTimeout(()=> this.isLoading = false, 1000);
+                this.displayDialog = false;         
+              })
+              .catch(error => this.show(error.error.message, error.error.cod))
       },
-      error: err => { this.show(err.error.message, err.error.cod); this.isLoading = false}
+      error: err => { 
+        this.show(err.error.message, err.error.cod);
+        this.isLoading = false;        
+      }
+      
     })
-
   }
 
   show(value: string, status: number) {
+    switch(status){
+      case 200: this.msg.add({ severity: 'success', summary: 'Success', detail: value });
+      break;
+      case 211: this.msg.add({ severity: 'info', summary: 'Must be a different city', detail: value });
+      break;
+      default: this.msg.add({ severity: 'error', summary: 'Something wrong...', detail: value });
+      break;
+    }
+    setTimeout(()=> {
+      this.msg.clear();
 
-    status === 200 ? this.msg.add({ severity: 'success', summary: 'Success', detail: value })
-      :
-      this.msg.add({ severity: 'warn', summary: 'Something wrong...', detail: value })
+    }, 3000)
 
   }
 

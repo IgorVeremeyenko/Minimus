@@ -7,9 +7,10 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { getDatabase, onValue, ref } from 'firebase/database';
+import { getDatabase, onValue, ref, remove, set } from 'firebase/database';
 import { app } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { MessegesService } from './messeges.service';
 
 
 @Injectable({
@@ -25,7 +26,8 @@ export class AuthService {
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    private messegesService: MessegesService
   ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
@@ -62,8 +64,39 @@ export class AuthService {
             this.cities = data;
           }
       })
-
+      
     }
+  }
+
+  removeCity(name: string){
+    this.afAuth.authState
+    .subscribe(user => {
+      if(user){
+        onValue(ref(this.database, 'userProfile/' + user.uid), (snapshot)=> {
+          for (const iterator in snapshot.val()) {
+            if(iterator === 'cities'){
+              for (const [key, val] of Object.entries(snapshot.val()[iterator])) {                
+                let cityName: any = val
+                if(name.toLowerCase() === cityName.toString().toLowerCase()){
+                  // console.log('userProfile/' + user.uid + '/cities/' + key + '/' +val)
+                  set(ref(this.database, 'userProfile/' + user.uid + '/cities/' + key), null)
+                  .then(() => {
+                    // Data saved successfully!
+                    this.messegesService.getToast('Succesfully removed!', 200);
+                  })
+                  .catch((error) => {
+                    // The write failed...
+                    console.log(error)
+                  });
+                }
+              }
+            }
+            
+          }
+        })
+      }
+
+    })
   }
 
   getUserId(){
@@ -130,8 +163,8 @@ export class AuthService {
   }
   // Sign in with Google
   GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      this.router.navigate(['main']);
+    return this.AuthLogin(new auth.GoogleAuthProvider()).then(() => {
+      this.router.navigateByUrl('main');
     });
   }
   // Auth logic to run auth providers

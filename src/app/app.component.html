@@ -2,23 +2,25 @@
   <h3>Welcome back!</h3>
   <span> <strong> {{username}}</strong></span>
   <br>
-  <span> <a href="mailto:viruscomp7@gmail.com" target="_blank">viruscomp7@gmail.com</a> </span>
+  <span> Author: <a href="mailto:viruscomp7@gmail.com" target="_blank">viruscomp7@gmail.com</a> </span>
   <button pButton pRipple type="button" label="Sign out" (click)="signOut()" class="p-button-outlined p-button-rounded p-button-danger"></button>
 </p-sidebar>
 <p-toolbar class="toolbar">
   <div class="p-toolbar-group-left">
     <button pButton pRipple type="button" icon="pi pi-bars" (click)="visibleSidebar1 = true"
       class="p-button-rounded p-button-text"></button>
-    <div class="logo"></div>
-    <h2>Minimus</h2>
-  </div>
-  <div class="current-day" *ngIf="today">
-    <h3>Today</h3>
-  </div>
-  <div class="p-toolbar-group-right">
-    <p-toggleButton [(ngModel)]="checked2" onLabel="Light" offLabel="Dark" onIcon="pi pi-sun" offIcon="pi pi-moon">
+    </div>
+    <div class="current-day" *ngIf="today">
+      <h3>Today</h3>
+    </div>
+    <div class="name" (click)="goToMain()">
+      <div class="logo"></div>
+      <h2>Minimus</h2>
+    </div>
+  <!-- <div class="p-toolbar-group-right">
+    <p-toggleButton [(ngModel)]="checked" onLabel="Light" offLabel="Dark" (click)="changeTheme()" onIcon="pi pi-sun" offIcon="pi pi-moon">
     </p-toggleButton>
-  </div>
+  </div> -->
 
 </p-toolbar>
 <app-breadcrumnp-class></app-breadcrumnp-class>

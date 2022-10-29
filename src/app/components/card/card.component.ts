@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { LoadImagesService } from 'src/app/services/load-images.service';
 import { WeatherService } from 'src/app/services/weather.service';
 
@@ -23,7 +24,7 @@ export class CardComponent implements OnInit, AfterViewInit {
 
   randomImage!: string
 
-  constructor(private weather: WeatherService, private dataService: LoadImagesService) { 
+  constructor(private weather: WeatherService, private dataService: LoadImagesService, private authService: AuthService) { 
     
   }
   ngAfterViewInit(): void {

@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DialogOptionsService } from 'src/app/services/dialog-options.service';
 import { Router } from '@angular/router';
 import { BreadcrumbsService } from 'src/app/services/breadcrumbs.service';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-list',
@@ -23,7 +24,15 @@ export class ListComponent implements OnInit, AfterViewInit {
   user: any;
   isLoading: boolean = true;
   skeletonItems: any[] = [];
-  constructor(private breadCrumbp: BreadcrumbsService, private dataService: WeatherService, private authService: AuthService, private _dialogService: DialogOptionsService, private _router: Router) { }
+  constructor(
+    private breadCrumbp: BreadcrumbsService, 
+    private dataService: WeatherService, 
+    private authService: AuthService, 
+    private _dialogService: DialogOptionsService, 
+    private _router: Router, 
+    private confirmationService: ConfirmationService,
+    private router: Router
+    ) { }
   ngAfterViewInit(): void {
     // this.isLoading = false;
    
@@ -46,6 +55,7 @@ export class ListComponent implements OnInit, AfterViewInit {
             this.cities = undefined;
             this.cities = data2;
           }
+          
           const items = this.cities.cities
           for (const iterator in items) {
             if(this.data.length > 1) this.data = []
@@ -58,7 +68,8 @@ export class ListComponent implements OnInit, AfterViewInit {
         })   
                
       } else {
-        
+        this.isLoading = false
+        this.router.navigateByUrl('')
       }
       
     });
@@ -73,6 +84,19 @@ export class ListComponent implements OnInit, AfterViewInit {
     return this._router.navigate(['details']);
   }
 
-  
+  removeCard(name: string, event: any){
+    this.confirmationService.confirm({
+      target: event.target,
+      message: `Are you sure that you want to proceed?(${name})`,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+          //confirm action
+          this.authService.removeCity(name);
+      },
+      reject: () => {
+          //reject action
+      }
+  });
+  }
 
 }

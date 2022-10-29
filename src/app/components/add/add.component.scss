@@ -9,4 +9,19 @@
 
 .p-inputgroup .p-inputtext, .p-fluid .p-inputgroup .p-inputtext, .p-inputgroup .p-inputwrapper, .p-inputgroup .p-inputwrapper>.p-component{
     width: 100%!important;
+    justify-content: center;
+}
+:host ::ng-deep .p-inputgroup {
+    align-items: center;
+}
+
+:host ::ng-deep .p-input-icon-left>i, .p-input-icon-right>i{
+    margin-top: 0.5rem;
+}
+:host ::ng-deep .p-inputgroup > .p-component, .p-inputgroup > .p-element, .p-inputgroup > .p-inputwrapper > .p-component > .p-inputtext, .p-inputgroup > .p-float-label > .p-component{
+    margin-top: 2rem;
+}
+
+.card-container {
+    cursor: pointer;
 }

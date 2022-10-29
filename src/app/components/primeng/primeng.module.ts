@@ -21,6 +21,9 @@ import {TabViewModule} from 'primeng/tabview';
 import {ChartModule} from 'primeng/chart';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {SelectButtonModule} from 'primeng/selectbutton';
+import {AutoFocusModule} from 'primeng/autofocus';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {TooltipModule} from 'primeng/tooltip';
 
 @NgModule({
   declarations: [],
@@ -46,7 +49,10 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     TabViewModule,
     ChartModule,
     BreadcrumbModule,
-    SelectButtonModule
+    SelectButtonModule,
+    AutoFocusModule,
+    ConfirmPopupModule,
+    TooltipModule
   ],
   exports: [
     ButtonModule,
@@ -69,7 +75,10 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     TabViewModule,
     ChartModule,
     BreadcrumbModule,
-    SelectButtonModule
+    SelectButtonModule,
+    AutoFocusModule,
+    ConfirmPopupModule,
+    TooltipModule
   ]
 })
 export class PrimengModule { }

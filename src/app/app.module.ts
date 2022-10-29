@@ -19,7 +19,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from './services/auth.service';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { CardComponent } from './components/card/card.component';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { LoginGuardModule } from './guard/login-guard/login-guard.module';
 import { MainGuardModule } from './guard/main-guard/main-guard.module';
 import { DeactivateGuardModule } from './guard/deactivate-guard/deactivate-guard.module';
@@ -51,7 +51,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     AngularFireDatabaseModule,
     AngularSvgIconModule.forRoot()
   ],
-  providers: [AuthService, MessageService, LoginGuardModule, MainGuardModule, DeactivateGuardModule, DetailsGuardModule],
+  providers: [AuthService, MessageService, LoginGuardModule, MainGuardModule, DeactivateGuardModule, DetailsGuardModule, ConfirmationService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -30,7 +30,7 @@
             "styles": [
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"              
+              "node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": [
               "node_modules/chart.js/dist/chart.js"
@@ -100,9 +100,18 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
-              
+              "../node_modules/primeng/resources/themes/bootstrap4-dark-purple/theme.css",
+              "src/styles.scss",
+              {
+                "input": "src/theme-bootstrap-dark.scss",
+                "bundleName": "bootstrap4-dark",
+                "inject": false
+              },
+              {
+                "input": "src/theme-bootstrap-light.scss",
+                "bundleName": "bootstrap4-light",
+                "inject": false
+              }
             ],
             "scripts": [
               "./node_modules/chart.js/dist/chart.js"

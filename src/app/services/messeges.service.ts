@@ -22,7 +22,7 @@ export class MessegesService {
   }
 
   getToast(value: string, status: number){
-    status === 200 ? this.msg.add({severity: 'Success', summary: 'Success', detail: value})
+    status === 200 ? this.msg.add({severity: 'success', summary: 'Success', detail: value})
     :
     this.msg.add({severity: 'warn', summary: 'Something wrong...', detail: value})
   }

@@ -5,6 +5,7 @@ import { AuthService } from './services/auth.service';
 import { BreadcrumbsService } from './services/breadcrumbs.service';
 import { DialogOptionsService } from './services/dialog-options.service';
 import { MessegesService } from './services/messeges.service';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -18,14 +19,18 @@ export class AppComponent{
   home!: MenuItem;
   action!: MenuItem;
   today: boolean = true;
-  username: any
+  username: any;
+  checked: boolean = true;
+  public displayDialog: boolean = false;
+  visibleSidebar1: boolean = false;
   constructor(
     private messageService: MessegesService, 
     private primeConfig: PrimeNGConfig, 
     private router: Router, 
     private authService: AuthService, 
     private _dialogService: DialogOptionsService,
-    private breadCrumbs: BreadcrumbsService
+    private breadCrumbs: BreadcrumbsService,
+    private theme: ThemeService
     ) {}
 
   ngOnInit() {
@@ -43,10 +48,7 @@ export class AppComponent{
       this.username = temp.displayName
     }
   }
-  checked1: boolean = false;
-  checked2: boolean = true;
-  public displayDialog: boolean = false;
-  visibleSidebar1: boolean = false;
+  
   goToAdd() {
     this.router.navigateByUrl('add')
   }
@@ -60,5 +62,14 @@ export class AppComponent{
 
   signOut() {
     this.authService.SignOut();
+  }
+
+  changeTheme(){    
+    if(this.checked) this.theme.switchTheme('light');
+    else this.theme.switchTheme('dark');
+  }
+
+  goToMain(){
+    this.router.navigateByUrl('main')
   }
 }

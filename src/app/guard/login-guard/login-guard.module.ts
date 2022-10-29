@@ -16,13 +16,13 @@ export class LoginGuardModule implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
 
-    const isLogged = this.auth.isLogged();
-    if (isLogged === false) {
+    const isLogged = localStorage.getItem('user');
+    if (isLogged != null) {
       return true
     }
     else {
       this._router.navigate(['/main']);
+      return false
     }
-    return false
   }
 }

@@ -57,6 +57,7 @@ export class AddComponent implements OnInit {
     this.weatherService.getCity(this.inputValue).subscribe({
       next: () => {
         this.isLoading = true
+        console.log(this.authService.cities)
         for (const key in this.authService.cities.cities) {
           if (Object.prototype.hasOwnProperty.call(this.authService.cities.cities, key)) {
             const element = this.authService.cities.cities[key];

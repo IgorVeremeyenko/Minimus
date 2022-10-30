@@ -55,16 +55,22 @@ export class ListComponent implements OnInit, AfterViewInit {
             this.cities = undefined;
             this.cities = data2;
           }
-          
-          const items = this.cities.cities
-          for (const iterator in items) {
-            if(this.data.length > 1) this.data = []
-            this.dataService.getData(items[iterator]).subscribe(names => {
-              this.data.push(names);
-            })           
+          if(this.cities === null) {
+            this.cities = undefined;
+            this.isLoading = false;
           }
-          this.isLoading = false;
-          
+          else {
+            const items = this.cities.cities
+            for (const iterator in items) {
+              if(this.data.length > 1) this.data = []
+              this.dataService.getData(items[iterator]).subscribe(names => {
+                this.data.push(names);
+              })           
+            }
+            this.isLoading = false;
+           
+
+          }
         })   
                
       } else {

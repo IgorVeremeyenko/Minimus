@@ -7,7 +7,7 @@ export const environment = {
   production: false,
   firebaseConfig: {
     apiKey: "AIzaSyBhXkBf-Ecb2dybaPd6RZvEsJRvhPQ5pLw",
-    authDomain: "portfilio-weather-angular-ts.firebaseapp.com",
+    authDomain: "minimus.gopr-service.com.ua",
     databaseURL: "https://portfilio-weather-angular-ts-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "portfilio-weather-angular-ts",
     storageBucket: "portfilio-weather-angular-ts.appspot.com",

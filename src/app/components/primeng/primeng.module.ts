@@ -24,6 +24,8 @@ import {SelectButtonModule} from 'primeng/selectbutton';
 import {AutoFocusModule} from 'primeng/autofocus';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {TooltipModule} from 'primeng/tooltip';
+import {PasswordModule} from 'primeng/password';
+import {BlockUIModule} from 'primeng/blockui';
 
 @NgModule({
   declarations: [],
@@ -52,7 +54,9 @@ import {TooltipModule} from 'primeng/tooltip';
     SelectButtonModule,
     AutoFocusModule,
     ConfirmPopupModule,
-    TooltipModule
+    TooltipModule,
+    PasswordModule,
+    BlockUIModule
   ],
   exports: [
     ButtonModule,
@@ -78,7 +82,9 @@ import {TooltipModule} from 'primeng/tooltip';
     SelectButtonModule,
     AutoFocusModule,
     ConfirmPopupModule,
-    TooltipModule
+    TooltipModule,
+    PasswordModule,
+    BlockUIModule
   ]
 })
 export class PrimengModule { }

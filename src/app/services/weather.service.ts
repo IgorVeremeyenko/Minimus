@@ -96,7 +96,7 @@ export class WeatherService {
       username: name
     }
     set(reffer, newCity);
-  }
+  }  
 
   pushCitiesToUser(userId: string, city: string) {
     const db = this.database;

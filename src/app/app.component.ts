@@ -21,6 +21,7 @@ export class AppComponent{
   today: boolean = true;
   username: any;
   checked: boolean = true;
+  curPage: boolean = true;
   public displayDialog: boolean = false;
   visibleSidebar1: boolean = false;
   constructor(
@@ -29,11 +30,12 @@ export class AppComponent{
     private router: Router, 
     private authService: AuthService, 
     private _dialogService: DialogOptionsService,
-    private breadCrumbs: BreadcrumbsService,
+    public breadCrumbs: BreadcrumbsService,
     private theme: ThemeService
     ) {}
 
   ngOnInit() {
+    
     this.primeConfig.ripple = true;
     this.messageService.getMes().subscribe(message => {
       this.msgs = message;
@@ -64,10 +66,10 @@ export class AppComponent{
     this.authService.SignOut();
   }
 
-  changeTheme(){    
-    if(this.checked) this.theme.switchTheme('light');
-    else this.theme.switchTheme('dark');
-  }
+  // changeTheme(){    
+  //   if(this.checked) this.theme.switchTheme('light');
+  //   else this.theme.switchTheme('dark');
+  // }
 
   goToMain(){
     this.router.navigateByUrl('main')

@@ -1,4 +1,7 @@
 <div *ngIf="!isLoading; else ElseBlock" class="cards">
+    <div class="empty-list" *ngIf="data.length === 0">
+        <h2>Add your favorite city to display</h2>
+    </div>
     <div *ngFor="let items of data; index as i" style="cursor: pointer;">
         <app-card 
             [cityName]="items.name" 

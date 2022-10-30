@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -11,14 +12,14 @@ export class BreadcrumbsService {
 
   menus$!: any;
   
-  constructor() {
+  constructor(private router: Router) {
     this.menus = new BehaviorSubject<string | null>(null);
     this.menus$ = this.menus.asObservable(); 
   }
 
   setMenuItems(value: string){
     // this.menuItems.next(value);
-   this.menus.next(value)
+    this.menus.next(value)
   }
 
   getMenuItems(){

@@ -11,6 +11,7 @@ import { getDatabase, onValue, ref, remove, set } from 'firebase/database';
 import { app } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { MessegesService } from './messeges.service';
+import { createUserWithEmailAndPassword, getAuth, sendSignInLinkToEmail, signInWithEmailAndPassword, updatePassword, updateProfile } from 'firebase/auth';
 
 
 @Injectable({
@@ -112,9 +113,10 @@ export class AuthService {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.SetUserData(result.user);
+        // this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
           if (user) {
+            localStorage.setItem('user', JSON.stringify(this.userData));
             this.router.navigate(['main']);
           }
         });
@@ -124,33 +126,75 @@ export class AuthService {
       });
   }
   // Sign up with email/password
-  SignUp(email: string, password: string) {
-    return this.afAuth
-      .createUserWithEmailAndPassword(email, password)
+  SignUp(email: string, password: string, name: string) {
+    const auth = getAuth();
+    return createUserWithEmailAndPassword(auth,email, password)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
-        this.SendVerificationMail();
-        this.SetUserData(result.user);
+        const userAuth = getAuth();
+       signInWithEmailAndPassword(userAuth,email,password).then(res => {
+        updateProfile(userAuth.currentUser!,{
+          displayName: name
+        }).then(() => {
+          updatePassword(userAuth.currentUser!, password).then(()=> {
+            //needs to add user to database
+            this.addNewUser(auth.currentUser!.uid, name);
+            this.userData = userAuth.currentUser!;
+            localStorage.setItem('user', JSON.stringify(this.userData));
+            this.router.navigateByUrl('main');
+          })
+        }).catch(err => console.log(err))
+       })
+        // this.SetUserData(result.user);
       })
       .catch((error) => {
         window.alert(error.message);
       });
   }
+  addNewUser(userId: string, name: string){
+    const db = this.database;
+    const reffer = ref(db, 'userProfile/' + userId);
+    const key: any = reffer.key
+    const newUser = {
+      username: name,
+      cities: {}
+    }
+    set(reffer, newUser);
+  }
   // Send email verfificaiton when new user sign up
-  SendVerificationMail() {
-    return this.afAuth.currentUser
-      .then((u: any) => u.sendEmailVerification())
-      .then(() => {
-        this.router.navigate(['verify-email-address']);
-      });
+  SendVerificationMail(email: string, pass: string) {
+    // return this.afAuth.currentUser
+    //   .then((u: any) => u.sendEmailVerification())
+    //   .then((r) => {
+    //     console.log(r)
+    //     // this.router.navigate(['verify-email-address']);        
+    //   });
+    const actionCodeSettings = {
+      // URL you want to redirect back to. The domain (www.example.com) for this
+      // URL must be in the authorized domains list in the Firebase Console.
+      url: 'https://minimus.gopr-service.com.ua',
+      // This must be true.
+      handleCodeInApp: true,
+      
+      dynamicLinkDomain: 'gopr-service.com.ua'
+    };
+    const user = auth.getAuth()
+    sendSignInLinkToEmail(user, email,actionCodeSettings).then(res => {
+      console.log(res)
+    })
   }
   // Reset Forggot password
   ForgotPassword(passwordResetEmail: string) {
+    console.log(passwordResetEmail)
     return this.afAuth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
         window.alert('Password reset email sent, check your inbox.');
+        setTimeout(()=> {
+          this.router.navigate(['main']);
+  
+        }, 1500)
       })
       .catch((error) => {
         window.alert(error);
@@ -159,7 +203,7 @@ export class AuthService {
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null && user.emailVerified !== false ? true : false;
+    return user !== null ? true : false;
   }
   // Sign in with Google
   GoogleAuth() {
@@ -187,7 +231,7 @@ export class AuthService {
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
   SetUserData(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.uid}`
+      `userProfile/${user.uid}`
     );
     const userData: User = {
       uid: user.uid,
@@ -198,6 +242,8 @@ export class AuthService {
     };
     return userRef.set(userData, {
       merge: true,
+    }).then(result => {
+      console.log(result)
     });
   }
   // Sign out

@@ -1,52 +1,50 @@
+<p-blockUI [blocked]="blockedDocument">
+  <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+</p-blockUI>
 <div class="displayTable">
     <div class="displayTableCell">
       <div class="authBlock">
         <h3>Sign Up</h3>
-        <div class="formGroup">
-          <input
-            type="email"
-            class="formControl"
-            placeholder="Email Address"
-            #userEmail
-            required
-          />
+        
+        <div class="grid p-fluid">
+          <div class="field col-12 md:col-4" [formGroup]="userform">            
+            <div class="p-inputgroup">
+              <input type="text" formControlName="name" pInputText placeholder="Username">         
+              <input type="text" formControlName="email" pInputText placeholder="Email">         
+            </div>
+            <p-password formControlName="pass" [toggleMask]="true" placeholder="Password" [class]="passw?.valid ? '' : dirtyPassword"></p-password>
+            <p-password formControlName="confirmPass" [toggleMask]="true" [feedback]="false" placeholder="Confirm password" [class]="isConfirms ? '' : dirtyPassword"></p-password>
+            <!-- <input pInputText [(ngModel)]="value10" formControlName="confirmPass"  placeholder="Confirm password" [class]="isConfirms ? '' : dirtyPassword"/> -->
+            <div class="errors">
+              <p-message severity="error" text="Minimum 6 symbols" *ngIf="passw?.errors?.['minlength'] && passw?.touched"></p-message>
+              <p-message severity="error" text="Password is required" *ngIf="passw?.invalid&&passw?.touched"></p-message>
+              <p-message severity="error" text="Please type correct email" *ngIf="mail?.touched && mail?.invalid"></p-message>
+              <p-message severity="error" text="Password does not match" *ngIf="!isConfirms"></p-message>
+            </div>
+            <button pButton pRipple [disabled]="!formValid" label="Register" (click)="register()" class="p-button-outlined p-button-success"></button>
+          </div>
         </div>
-        <div class="formGroup">
-          <input
-            type="password"
-            class="formControl"
-            placeholder="Password"
-            #userPwd
-            required
-          />
-        </div>
-        <div class="formGroup">
-          <input
-            type="button"
-            class="btn btnPrimary"
-            value="Sign Up"
-            (click)="authService.SignUp(userEmail.value, userPwd.value)"
-          />
-        </div>
-        <div class="formGroup">
+        
+        <div class="group">
           <span class="or"><span class="orInner">Or</span></span>
         </div>
         <!-- Continue with Google -->
-        <div class="formGroup">
-          <button
-            type="button"
-            class="btn googleBtn"
-            (click)="authService.GoogleAuth()"
-          >
-            <i class="fab fa-google-plus-g"></i>
-            Continue with Google
-          </button>
+        <div class="group">
+          <p-button styleClass="p-button-outlined" (click)="authService.GoogleAuth()">
+            <ng-template pTemplate="content">
+                <img alt="logo" src="../../../assets/svg/google.svg" style="width: 1.5rem"/>
+                <span class="ml-2 font-bold">Continue with Google</span>
+            </ng-template>
+        </p-button>
+         
         </div>
       </div>
       <div class="redirectToLogin">
         <span
           >Already have an account?
-          <span class="redirect" routerLink="/sign-in">Log In</span></span>
+          
+        </span>
+        <button pButton pRipple type="button" label="Sign In" (click)="router.navigateByUrl('login')" class="p-button-secondary p-button-text"></button>
       </div>
     </div>
   </div>

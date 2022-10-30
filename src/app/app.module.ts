@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './components/material/material.module';
 import { PrimengModule } from './components/primeng/primeng.module';
 import { DetailsComponent } from './components/details/details.component';
 import { AddComponent } from './components/add/add.component';
@@ -26,6 +25,9 @@ import { DeactivateGuardModule } from './guard/deactivate-guard/deactivate-guard
 import { BreadcrumnpClassComponent } from './components/breadcrumnp-class/breadcrumnp-class.component';
 import { DetailsGuardModule } from './guard/details-guard/details-guard.module';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { LoginComponent } from './components/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,13 +37,13 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     ListComponent,
     SignUpComponent,
     CardComponent,
-    BreadcrumnpClassComponent
+    BreadcrumnpClassComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
     PrimengModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -49,7 +51,9 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    AngularSvgIconModule.forRoot()
+    AngularSvgIconModule.forRoot(),
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [AuthService, MessageService, LoginGuardModule, MainGuardModule, DeactivateGuardModule, DetailsGuardModule, ConfirmationService],
   bootstrap: [AppComponent],

@@ -42,6 +42,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
+import { PasswordModule } from 'primeng/password';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -82,7 +84,9 @@ import { FormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    FormsModule
+    FormsModule,
+    PasswordModule,
+    ReactiveFormsModule
   ],
   exports: [
     MatAutocompleteModule,
@@ -120,7 +124,9 @@ import { FormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    FormsModule
+    FormsModule,
+    PasswordModule,
+    ReactiveFormsModule
   ]
 })
 export class MaterialModule { }

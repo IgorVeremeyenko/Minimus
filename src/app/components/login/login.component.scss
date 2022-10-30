@@ -1,0 +1,30 @@
+.inputs{
+    display: flex;
+    flex-direction: column;
+}
+
+.p-element{
+    margin-top: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#username2-help, #password-help{
+    padding-left: 0.8rem;
+}
+:host ::ng-deep .p-dialog .p-dialog-footer{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+:host ::ng-deep .p-dialog .p-dialog-footer button{
+    margin: 0;
+}
+:host ::ng-deep .p-element[_ngcontent-dyc-c72]{
+    margin-top: 0;
+    margin-bottom: 1rem;
+}

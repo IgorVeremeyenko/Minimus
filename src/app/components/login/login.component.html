@@ -1,0 +1,26 @@
+<div class="wrapper">
+    <form class="form-signin" [formGroup]="userForm">       
+      <h2 class="form-signin-heading">Please login</h2>
+      <div class="inputs">        
+        <input pInputText formControlName="email" aria-describedby="username2-help" #userEmail [class]="email?.valid ? 'form-control' : 'ng-invalid ng-dirty'" name="username" placeholder="Email Address" required autofocus />
+        <small *ngIf="email?.invalid" id="username2-help" class="p-error block">Email is required.</small>
+        <p-password formControlName="password" [toggleMask]="true" aria-describedby="password-help" #userPwd [class]="password?.valid ? '' : 'ng-invalid ng-dirty'" name="password" placeholder="Password" [feedback]="false"></p-password>
+        <small *ngIf="password?.errors?.['minlength']" id="password-help" class="p-error block">At list 6 symbols.</small>
+      </div>
+      <button pButton pRipple type="button" (click)="showPositionDialog('top')" label="Forgot your password?" class="p-button-text p-button-plain"></button>
+      <p-button label="Login" (onClick)="auth.SignIn(userEmail.value, userPwd.value)" [disabled]="!validForm" icon="pi pi-check"></p-button>
+     
+      <button pButton pRipple icon="pi pi-arrow-left" type="button" label="Registration" (click)="router.navigateByUrl('')" class="p-button-rounded p-button-secondary p-button-outlined"></button>
+    </form>
+
+    <p-dialog header="FORGOR YOUR PASSWORD?" [(visible)]="displayPosition" [position]="position" [modal]="true" [style]="{width: '50vw'}"
+    [draggable]="false" [resizable]="false">
+    
+        <ng-template pTemplate="footer">
+          <input type="text" pInputText [(ngModel)]="mail" style="margin-top: 0; margin-bottom: 1rem;"> 
+          <button pButton pRipple type="button" (click)="forgotPass()" label="CHANGE PASSWORD" class="p-button-warning"></button>
+          
+            <p-button icon="pi pi-arrow-left" (onClick)="displayPosition=false" label="Back" styleClass="p-button-text p-button-secondary"></p-button>
+        </ng-template>
+</p-dialog>
+  </div>

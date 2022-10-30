@@ -17,7 +17,7 @@
     [draggable]="false" [resizable]="false">
     
         <ng-template pTemplate="footer">
-          <input type="text" pInputText [(ngModel)]="mail" style="margin-top: 0; margin-bottom: 1rem;"> 
+          <input type="text" pInputText [(ngModel)]="mail" style="margin-top: 0; margin-bottom: 1rem;" placeholder="Enter your email"> 
           <button pButton pRipple type="button" (click)="forgotPass()" label="CHANGE PASSWORD" class="p-button-warning"></button>
           
             <p-button icon="pi pi-arrow-left" (onClick)="displayPosition=false" label="Back" styleClass="p-button-text p-button-secondary"></p-button>

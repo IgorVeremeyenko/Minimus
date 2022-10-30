@@ -16,6 +16,11 @@
         "source": "/details",
         "destination": "/main",
         "type": 301
+      },
+      {
+        "source": "/login",
+        "destination": "/",
+        "type": 301
       }
     ]
   }
